@@ -1,9 +1,11 @@
-﻿using WebApi_Funcionarios.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using WebApi_Funcionarios.Enums;
 
 namespace WebApi_Funcionarios.Models
 {
     public class FuncionarioModel
     {
+        [Key] //dizendo que id é a primary key
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
