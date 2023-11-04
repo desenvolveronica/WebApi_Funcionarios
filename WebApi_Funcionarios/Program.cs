@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi_Funcionarios.DataContext;
+using WebApi_Funcionarios.Service.FuncionarioService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IFuncionarioInterface, FuncionarioService>(); //MAPEANDO PARA QUANDO HOUVER UMA INJEÇÃO DE DEPENDÊNCIA
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
 {
