@@ -1,4 +1,5 @@
-﻿using WebApi_Funcionarios.DataContext;
+﻿using Microsoft.EntityFrameworkCore;
+using WebApi_Funcionarios.DataContext;
 using WebApi_Funcionarios.Models;
 
 namespace WebApi_Funcionarios.Service.FuncionarioService
@@ -117,9 +118,31 @@ namespace WebApi_Funcionarios.Service.FuncionarioService
             return serviceResponse;
         }
 
-        public Task<ServiceResponse<List<FuncionarioModel>>> UpdateFuncionario(FuncionarioModel editadoFuncionario)
+        public async Task<ServiceResponse<List<FuncionarioModel>>> UpdateFuncionario(FuncionarioModel editadoFuncionario)
         {
-            throw new NotImplementedException();
+            ServiceResponse<List<FuncionarioModel>> serviceResponse = new ServiceResponse<List<FuncionarioModel>>();
+            try
+            {
+                FuncionarioModel funcionario = _context.Funcionarios.AsNoTracking().FirstOrDefault(x => x.Id == editadoFuncionario.Id);
+
+                if (funcionario == null)
+                {
+                    serviceResponse.Dados = null;
+                    serviceResponse.Mensagem = "Usuário não localizado";
+                    serviceResponse.Sucesso = false;
+                }
+                funcionario.DataDeAlteracao = DateTime.Now.ToLocalTime();
+                _context.Funcionarios.Update(editadoFuncionario);
+
+                await _context.SaveChangesAsync();
+                serviceResponse.Dados= _context.Funcionarios.ToList();
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Mensagem = ex.Message;
+                serviceResponse.Sucesso = false;
+            }
+            return serviceResponse;
         }
     }
 }
