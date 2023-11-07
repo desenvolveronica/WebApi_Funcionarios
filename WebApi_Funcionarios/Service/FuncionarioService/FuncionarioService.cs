@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApi_Funcionarios.DataContext;
 using WebApi_Funcionarios.Models;
-
+//responsável por se comunicar com o banco
 namespace WebApi_Funcionarios.Service.FuncionarioService
 {
     public class FuncionarioService : IFuncionarioInterface
