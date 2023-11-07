@@ -30,7 +30,7 @@ namespace WebApi_Funcionarios.Service.FuncionarioService
                 _context.Add(novoFuncionario);
                 await _context.SaveChangesAsync();
 
-                serviceResponse.Dados = _context.Funcionarios.ToList();
+                serviceResponse.Dados = _context.Funcionarios.ToList(); //coloca em dados toda a lista de funcionários do banco
 
 
             }
@@ -61,7 +61,7 @@ namespace WebApi_Funcionarios.Service.FuncionarioService
                 _context.Funcionarios.Remove(funcionario);
                 await _context.SaveChangesAsync();
 
-                serviceResponse.Dados = _context.Funcionarios.ToList();
+                serviceResponse.Dados = _context.Funcionarios.ToList(); 
 
             }
             catch (Exception ex)
@@ -85,7 +85,7 @@ namespace WebApi_Funcionarios.Service.FuncionarioService
                     serviceResponse.Mensagem = "Usuário não localizado";
                     serviceResponse.Sucesso = false;
                 }
-                serviceResponse.Dados = funcionario;
+                serviceResponse.Dados = funcionario; // retorna todos os dados so funcionário localizado pelo ID
             }
             catch (Exception ex)
             {
@@ -113,7 +113,7 @@ namespace WebApi_Funcionarios.Service.FuncionarioService
                 serviceResponse.Mensagem = ex.Message;
                 serviceResponse.Sucesso = false;
             }
-            return serviceResponse;
+            return serviceResponse; //Em dados da classe ServiceResponse retorna uma lista de FuncionarioModel
         }
 
         public async Task<ServiceResponse<List<FuncionarioModel>>> InativaFuncionario(int id)
@@ -134,7 +134,7 @@ namespace WebApi_Funcionarios.Service.FuncionarioService
                 _context.Funcionarios.Update(funcionario);
                 await _context.SaveChangesAsync();
 
-                serviceResponse.Dados = _context.Funcionarios.ToList();
+                serviceResponse.Dados = _context.Funcionarios.ToList(); //retorna em serviceResponse.Dados a lista da tabela funcionarios
             }
             catch( Exception ex)
             {
