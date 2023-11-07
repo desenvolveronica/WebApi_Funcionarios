@@ -86,6 +86,8 @@ namespace WebApi_Funcionarios.Service.FuncionarioService
                     serviceResponse.Sucesso = false;
                 }
                 serviceResponse.Dados = funcionario; // retorna todos os dados so funcionário localizado pelo ID
+                serviceResponse.Mensagem = "Usuário " +funcionario.Nome + " localizado";
+                serviceResponse.Sucesso = true;
             }
             catch (Exception ex)
             {
