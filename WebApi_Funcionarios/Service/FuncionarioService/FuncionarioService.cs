@@ -115,6 +115,7 @@ namespace WebApi_Funcionarios.Service.FuncionarioService
                 serviceResponse.Mensagem = ex.Message;
                 serviceResponse.Sucesso = false;
             }
+            serviceResponse.Mensagem = "Listagem realizada com sucesso";
             return serviceResponse; //Em dados da classe ServiceResponse retorna uma lista de FuncionarioModel
         }
 
